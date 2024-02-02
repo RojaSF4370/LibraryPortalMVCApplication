@@ -1,0 +1,81 @@
+﻿@model IEnumerable<LibraryApplication.Models.Book>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Library Management</h1>
+<div class="d-flex justify-content-end mt-1 mb-3">
+    <a asp-action="Create" class="btn btn-primary">Add Books</a>
+</div>
+<div class="table-responsive">
+
+<table class="table table-bordered ">
+        <thead class="thead-dark">
+        
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishedYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedOn)
+            </th>
+  
+            <th>
+                Actions
+            </th>
+    
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.BookCategory.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                 @(item.AuthorName != null ? Html.DisplayFor(modelItem => item.AuthorName) : "-")
+            </td>
+
+            <td>
+                @(item.PublishedYear != null ? Html.DisplayFor(modelItem => item.PublishedYear): "-")
+            </td>
+            <td>
+                @(item.Price!= null ? Html.DisplayFor(modelItem => item.Price): "-")
+            </td>
+            <td>
+                    @item.UpdatedOn.Date.ToString("dd-MM-yyyy")
+            </td>
+  
+            <td>
+@*                 <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+ *@                <a asp-action="Details" asp-route-id="@item.BookId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

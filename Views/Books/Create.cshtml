@@ -1,0 +1,62 @@
+﻿@model LibraryApplication.Models.Book
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add book details</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*categorey*@
+            <div class="form-group">
+                <label asp-for="BookCategoryId" class="control-label">Book Category</label>
+                <select asp-for="BookCategoryId" class="form-control" asp-items="@ViewBag.BookCategory"></select>
+            </div>
+            @*BookName*@
+            <div class="form-group">
+                <label asp-for="BookName" class="control-label">Book</label>
+                <input asp-for="BookName" class="form-control" pattern="[A-Za-z ]+" title="Please enter alphabetic characters only" />
+                <span asp-validation-for="BookName" class="text-danger"></span>
+            </div>
+
+            @*AuthorName*@
+            <div class="form-group">
+                <label asp-for="AuthorName" class="control-label">Author</label>
+                <input asp-for="AuthorName" class="form-control" pattern="[A-Za-z ]+" title="Please enter alphabetic characters only" />
+                <span asp-validation-for="AuthorName" class="text-danger"></span>
+            </div>
+            @*Published Year*@
+
+            <div class="form-group">
+                <label asp-for="PublishedYear" class="control-label">Published year</label>
+                <input asp-for="PublishedYear" type="text" class="form-control" pattern="[0-9]{4}" title="Please enter a 4-digit number" />
+                <span asp-validation-for="PublishedYear" class="text-danger"></span>
+            </div>
+            @*Price*@
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price</label>
+                <input asp-for="Price" class="form-control" pattern="[0-9]" title="Please enter a number" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            @*button submit and cancel*@
+
+            <div class="form-group mt-2">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-danger">Cancel </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary mt-2"> Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
